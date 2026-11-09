@@ -1,0 +1,23 @@
+.book-card {
+	overflow: hidden;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.book-card__cover {
+	aspect-ratio: 2 / 3;
+	object-fit: cover;
+	background-color: #e9ecef;
+}
+
+.book-card__title {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	overflow: hidden;
+}

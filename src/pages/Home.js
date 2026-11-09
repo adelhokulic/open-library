@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchBooks } from "../fetchApi/fetchBooks";
+import BookList from "../components/BookList";
+import { Container } from "react-bootstrap";
 
 const Home = () => {
 	const [books, setBooks] = useState([]);
@@ -7,16 +9,15 @@ const Home = () => {
 	useEffect(() => {
 		const loadBooksApi = async () => {
 			const data = await fetchBooks();
-			setBooks(data.works);
+			setBooks(data);
 		};
-        loadBooksApi()
+		loadBooksApi();
 	}, []);
 
-	console.log(books);
 	return (
-		<>
-			<h1>Home page</h1>
-		</>
+		<Container className="my-4">
+			<BookList books={books} />
+		</Container>
 	);
 };
 
