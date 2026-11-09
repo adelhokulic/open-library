@@ -54,3 +54,31 @@ export const fetchSearchedBooks = async (
 		total: response.data.numFound,
 	};
 };
+
+export const fetchBookDetails = async (id) => {
+	const response = await axios.get(
+		`${process.env.REACT_APP_OPEN_LIBRARY_API}/works/${id}.json`,
+	);
+	const data = response.data;
+	let authorName = "Unknown author";
+	if (data.authors && data.authors.length > 0) {
+		const authorKey = data.authors[0].author.key;
+		const author = await axios.get(
+			`${process.env.REACT_APP_OPEN_LIBRARY_API}${authorKey}.json`,
+		);
+		authorName = author.data.name;
+	}
+
+	return {
+		title: data.title,
+		description: data.description
+			? typeof data.description === "string"
+				? data.description
+				: data.description.value
+			: "No description available.",
+		authorName: authorName,
+		coverId: data.covers ? data.covers[0] : null,
+		subjects: data.subjects || [],
+		publishDate: data.first_publish_date || "Unknown publish date.",
+	};
+};

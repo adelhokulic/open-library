@@ -71,7 +71,6 @@ const Home = () => {
 			nextPage,
 		);
 	};
-
 	return (
 		<Container className="my-4">
 			{errorMessage && <p>{errorMessage}</p>}
