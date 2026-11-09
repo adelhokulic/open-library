@@ -6,7 +6,7 @@ const Navigation = () => {
 			<Container>
 				<Navbar.Brand href="/">Open Library</Navbar.Brand>
 				<Nav>
-					<Nav.Link href="/">Početna</Nav.Link>
+					<Nav.Link href="/">Home</Nav.Link>
 				</Nav>
 			</Container>
 		</Navbar>

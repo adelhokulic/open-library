@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchBooks } from "../fetchApi/fetchBooks";
 import BookList from "../components/BookList";
 import { Container } from "react-bootstrap";
+import SearchForm from "../components/SearchForm";
 
 const Home = () => {
 	const [books, setBooks] = useState([]);
@@ -16,6 +17,7 @@ const Home = () => {
 
 	return (
 		<Container className="my-4">
+			<SearchForm />
 			<BookList books={books} />
 		</Container>
 	);
