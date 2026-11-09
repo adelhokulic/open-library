@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-const SearchForm = ({ onSearchBooks }) => {
+const SearchForm = ({ onLoadBooks }) => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [searchBy, setSearchBy] = useState("title");
 	const [language, setLanguage] = useState("");
-	const searchBooks = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		onSearchBooks(searchTerm.trim(), searchBy, language);
+		onLoadBooks(searchTerm.trim(), searchBy, language);
 	};
 	return (
-		<Form onSubmit={searchBooks} className="mb-4">
+		<Form onSubmit={handleSubmit} className="mb-4">
 			<Row className="g-2">
 				<Col xs={12} lg={6}>
 					<Form.Control

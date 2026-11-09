@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const books_per_page = 12;
 
-export const fetchBooks = async (page) => {
+export const fetchHomeBooks = async (page) => {
 	const response = await axios.get(
 		`${process.env.REACT_APP_OPEN_LIBRARY_API}/subjects/programming.json`,
 		{ params: { limit: books_per_page, offset: (page - 1) * books_per_page } },
