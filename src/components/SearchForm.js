@@ -7,7 +7,7 @@ const SearchForm = ({ onSearchBooks }) => {
 	const [language, setLanguage] = useState("");
 	const searchBooks = (e) => {
 		e.preventDefault();
-		onSearchBooks(searchTerm, searchBy, language);
+		onSearchBooks(searchTerm.trim(), searchBy, language);
 	};
 	return (
 		<Form onSubmit={searchBooks} className="mb-4">

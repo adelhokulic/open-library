@@ -3,7 +3,7 @@ import axios from "axios";
 export const fetchBooks = async () => {
 	const response = await axios.get(
 		`${process.env.REACT_APP_OPEN_LIBRARY_API}/subjects/programming.json`,
-		{ params: { limit: 10 } },
+		{ params: { limit: 12 } },
 	);
 	return response.data.works.map((book) => {
 		return {
