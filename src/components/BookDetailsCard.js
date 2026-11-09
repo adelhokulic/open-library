@@ -1,4 +1,5 @@
 import { Badge, Card, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const BookDetailsCard = ({ book }) => {
 	const coverSrc = book.coverId
@@ -30,9 +31,14 @@ const BookDetailsCard = ({ book }) => {
 							<div className="book-details__subjects">
 								{book.subjects.map((subject) => {
 									return (
-										<Badge key={subject} bg="secondary" className="fw-normal">
-											{subject}
-										</Badge>
+										<Link
+											to={`/?subject=${encodeURIComponent(subject)}`}
+											key={subject}
+										>
+											<Badge bg="secondary" className="fw-normal">
+												{subject}
+											</Badge>
+										</Link>
 									);
 								})}
 							</div>

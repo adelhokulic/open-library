@@ -8,6 +8,7 @@ import BookList from "../components/BookList";
 import { Button, Container } from "react-bootstrap";
 import SearchForm from "../components/SearchForm";
 import Loader from "../components/Loader";
+import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
 	const [books, setBooks] = useState([]);
@@ -20,21 +21,32 @@ const Home = () => {
 		searchBy: "title",
 		language: "",
 	});
+	const [searchParams] = useSearchParams();
+	const subject = searchParams.get("subject") || null;
 
 	useEffect(() => {
 		const loadInitialBooks = async () => {
 			try {
 				setErrorMessage("");
-				const data = await fetchHomeBooks(1);
+				const data = subject
+					? await fetchSearchedBooks(subject, "subject", "", 1)
+					: await fetchHomeBooks(1);
 				setBooks(data.books);
 				setTotalBooks(data.total);
+				setCurrentPage(1);
+				setLastSearch({
+					searchTerm: subject || "",
+					searchBy: subject ? "subject" : "title",
+					language: "",
+				});
+				setIsBooksLoading(true);
 			} catch (error) {
 				setErrorMessage("Something went wrong. Please try again.");
 			}
 			setIsBooksLoading(false);
 		};
 		loadInitialBooks();
-	}, []);
+	}, [subject]);
 
 	const loadBooks = async (searchTerm, searchBy, language, pageToLoad = 1) => {
 		setIsBooksLoading(true);
