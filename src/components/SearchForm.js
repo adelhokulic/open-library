@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-const SearchForm = () => {
+const SearchForm = ({ onSearchBooks }) => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [searchBy, setSearchBy] = useState("title");
 	const [language, setLanguage] = useState("");
 	const searchBooks = (e) => {
 		e.preventDefault();
-		console.log(searchTerm, searchBy, language);
+		onSearchBooks(searchTerm, searchBy, language);
 	};
 	return (
 		<Form onSubmit={searchBooks} className="mb-4">

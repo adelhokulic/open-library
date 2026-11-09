@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchBooks } from "../fetchApi/fetchBooks";
+import { fetchBooks, fetchSearchedBooks } from "../fetchApi/fetchBooks";
 import BookList from "../components/BookList";
 import { Container } from "react-bootstrap";
 import SearchForm from "../components/SearchForm";
@@ -15,9 +15,14 @@ const Home = () => {
 		loadBooksApi();
 	}, []);
 
+	const searchBooks = async (searchTerm, searchBy, language) => {
+		const data = await fetchSearchedBooks(searchTerm, searchBy, language);
+		setBooks(data);
+	};
+
 	return (
 		<Container className="my-4">
-			<SearchForm />
+			<SearchForm onSearchBooks={searchBooks} />
 			<BookList books={books} />
 		</Container>
 	);
