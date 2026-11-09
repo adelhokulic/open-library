@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { fetchBookDetails } from "../fetchApi/fetchBooks";
 import Loader from "../components/Loader";
@@ -26,7 +27,14 @@ const BookDetails = () => {
 	}, [params.id]);
 
 	if (isLoading) return <Loader />;
-	if (errorMessage) return <p>{errorMessage}</p>;
+	if (errorMessage)
+		return (
+			<Container className="my-4">
+				<p className="error-message" role="alert">
+					{errorMessage}
+				</p>
+			</Container>
+		);
 
 	return <BookDetailsCard book={book} />;
 };

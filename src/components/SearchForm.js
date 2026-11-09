@@ -28,6 +28,7 @@ const SearchForm = ({ onLoadBooks }) => {
 					>
 						<option value="title">Title</option>
 						<option value="author">Author</option>
+						<option value="isbn">ISBN</option>
 					</Form.Select>
 				</Col>
 				<Col xs={6} lg={2}>

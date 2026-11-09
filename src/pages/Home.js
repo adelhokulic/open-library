@@ -73,7 +73,11 @@ const Home = () => {
 	};
 	return (
 		<Container className="my-4">
-			{errorMessage && <p>{errorMessage}</p>}
+			{errorMessage && (
+				<p className="error-message" role="alert">
+					{errorMessage}
+				</p>
+			)}
 			<SearchForm onLoadBooks={loadBooks} />
 			{isBooksLoading ? (
 				<Loader />

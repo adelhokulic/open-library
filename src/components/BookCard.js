@@ -6,7 +6,10 @@ const BookCard = ({ book }) => {
 		? `${process.env.REACT_APP_COVERS_API}/${book.coverId}-M.jpg`
 		: "/no-cover.svg";
 	return (
-		<Link className="text-decoration-none text-reset d-block h-100" to={`/book/${book.id}`}>
+		<Link
+			className="text-decoration-none text-reset d-block h-100"
+			to={`/book/${book.id}`}
+		>
 			<Card className="book-card h-100">
 				<Card.Img
 					variant="top"
@@ -17,12 +20,14 @@ const BookCard = ({ book }) => {
 				/>
 				<Card.Body className="d-flex flex-column">
 					<Card.Title className="book-card__title">{book.title}</Card.Title>
-					<Card.Text className="text-secondary mb-2">
+					<Card.Text className="book-card__authors text-secondary mb-2">
 						{book.authors.join(", ")}
 					</Card.Text>
-					<Card.Text className="text-secondary small mt-auto">
-						First edition: {book.year}
-					</Card.Text>
+					{book.year && (
+						<Card.Text className="text-secondary small mt-auto">
+							First edition: {book.year}
+						</Card.Text>
+					)}
 				</Card.Body>
 			</Card>
 		</Link>
