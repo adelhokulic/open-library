@@ -1,8 +1,14 @@
 import "./App.css";
+import Footer from "./components/Footer";
+import Navigation from "./components/Navigation";
+
 function App() {
-	console.log(process.env.REACT_APP_OPEN_LIBRARY_API);
-	console.log(process.env.REACT_APP_COVERS_API);
-	return <></>;
+	return (
+		<>
+			<Navigation />
+			<Footer />
+		</>
+	);
 }
 
 export default App;
