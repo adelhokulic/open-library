@@ -15,8 +15,8 @@ const Home = () => {
 		const loadBooksApi = async () => {
 			try {
 				setErrorMessage("");
-				const data = await fetchBooks();
-				setBooks(data);
+				const data = await fetchBooks(1);
+				setBooks(data.books);
 			} catch (error) {
 				setErrorMessage("Something went wrong. Please try again.");
 			}
@@ -29,8 +29,8 @@ const Home = () => {
 		setBooksLoading(true);
 		setErrorMessage("");
 		try {
-			const data =searchTerm==="" ? await fetchBooks() : await fetchSearchedBooks(searchTerm , searchBy, language);
-			setBooks(data);
+			const data =searchTerm==="" ? await fetchBooks(1) : await fetchSearchedBooks(searchTerm , searchBy, language, 1);
+			setBooks(data.books);
 		} catch (error) {
 			setErrorMessage("Something went wrong. Please try again.");
 		}
