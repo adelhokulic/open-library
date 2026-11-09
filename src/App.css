@@ -69,6 +69,60 @@
 	min-width: 7rem;
 }
 
+.book-details {
+	max-width: 60rem;
+	margin: 0 auto;
+	overflow: hidden;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.book-details__cover {
+	display: block;
+	width: 100%;
+	height: 100%;
+	aspect-ratio: 2 / 3;
+	object-fit: cover;
+	background-color: #e9ecef;
+}
+
+.book-details__body {
+	padding: 2rem;
+}
+
+.book-details__title {
+	margin-bottom: 0.5rem;
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.book-details__author {
+	margin-bottom: 0.25rem;
+	font-size: 1.125rem;
+}
+
+.book-details__date {
+	color: #6c757d;
+	font-size: 0.875rem;
+}
+
+.book-details__heading {
+	margin: 1.5rem 0 0.5rem;
+	font-size: 1.125rem;
+	font-weight: 600;
+}
+
+.book-details__description {
+	margin-bottom: 0;
+	line-height: 1.6;
+	white-space: pre-line;
+}
+
+.book-details__subjects {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.375rem;
+}
+
 @keyframes page-loader-fade-in {
 	from {
 		opacity: 0;
