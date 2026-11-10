@@ -9,7 +9,7 @@ const BookDetailsCard = ({ book }) => {
 		<Container className="my-4">
 			<Card className="book-details">
 				<Row className="g-0">
-					<Col xs={12} md={4}>
+					<Col xs={12} md={4} className="book-details__media">
 						<img
 							className="book-details__cover"
 							src={coverSrc}
@@ -20,7 +20,10 @@ const BookDetailsCard = ({ book }) => {
 						<Card.Body className="book-details__body">
 							<h1 className="book-details__title">{book.title}</h1>
 							{book.authorId ? (
-								<Link to={`/author/${book.authorId}`}>
+								<Link
+									className="book-details__author-link"
+									to={`/author/${book.authorId}`}
+								>
 									<p className="book-details__author">{book.authorName}</p>
 								</Link>
 							) : (
@@ -38,6 +41,7 @@ const BookDetailsCard = ({ book }) => {
 								{book.subjects.map((subject) => {
 									return (
 										<Link
+											className="book-details__subject-link"
 											to={`/?subject=${encodeURIComponent(subject)}`}
 											key={subject}
 										>
