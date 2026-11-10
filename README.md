@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Open Library Book Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive React application for searching and browsing books with the free [Open Library API](https://openlibrary.org/developers/api).
 
-## Available Scripts
+Users can search by title, author, or ISBN, filter by language, and open detailed pages for books and authors.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Book discovery:** the home page loads books on the topic of programming
+- **Search and filters:** search by title, author, or ISBN and filter results by language
+- **Pagination:** move through results with Previous and Next, for both the home list and searches
+- **Book details:** cover, title, author, publish date, description, and subjects
+- **Subject browsing:** select a subject to see related books, using a shareable URL
+- **Author pages:** biography, birth and death dates, and a list of works
+- **Complete UI states:** loading spinner, error messages, empty results, and fallbacks for missing covers, descriptions, and authors
+- **Responsive layout:** built mobile-friendly with React Bootstrap
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| Area | Technology |
+| --- | --- |
+| UI | React 19 |
+| Routing | React Router 7 |
+| Styling | React Bootstrap, Bootstrap 5, CSS |
+| Data fetching | Axios with async/await |
+| Tooling | Create React App |
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- [Node.js](https://nodejs.org/) and npm
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository and install the dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   git clone https://github.com/adelhokulic/open-library.git
+   cd open-library
+   npm install
+   ```
 
-### `npm run eject`
+2. Create a `.env` file in the project root, using `.env.example` as a template:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```env
+   REACT_APP_OPEN_LIBRARY_API=https://openlibrary.org
+   REACT_APP_COVERS_API=https://covers.openlibrary.org/b/id
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   Open Library does not require an API key.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Start the development server:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```bash
+   npm start
+   ```
 
-## Learn More
+   The app runs at [http://localhost:3000](http://localhost:3000).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To create a production build, run `npm run build`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Routes
 
-### Code Splitting
+| Path | Page |
+| --- | --- |
+| `/` | Home page with search and results |
+| `/?subject=:subject` | Books for a selected subject |
+| `/book/:id` | Book details |
+| `/author/:id` | Author details and works |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Project Structure
 
-### Analyzing the Bundle Size
+```text
+src/
+├── components/   Reusable UI: navigation, footer, search form, book cards, loader
+├── fetchApi/     Open Library requests and response mapping
+├── pages/        Route pages: Home, BookDetails, AuthorDetails
+├── App.js        Application layout and routes
+└── index.js      Application entry point
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## API Endpoints
 
-### Making a Progressive Web App
+| Purpose | Endpoint |
+| --- | --- |
+| Books by subject | `/subjects/{subject}.json` |
+| Search | `/search.json` |
+| Book details | `/works/{id}.json` |
+| Author details | `/authors/{id}.json` |
+| Author's works | `/authors/{id}/works.json` |
+| Cover images | `https://covers.openlibrary.org/b/id/{coverId}-{S\|M\|L}.jpg` |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Open Library returns different fields from different endpoints. The request functions in `src/fetchApi/fetch.js` map those responses into one consistent shape, so the same components can display books from any source.
 
-### Advanced Configuration
+## Data Source
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Book and author data is provided by [Open Library](https://openlibrary.org), a project of the Internet Archive.
