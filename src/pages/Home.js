@@ -3,7 +3,7 @@ import {
 	books_per_page,
 	fetchHomeBooks,
 	fetchSearchedBooks,
-} from "../fetchApi/fetchBooks";
+} from "../fetchApi/fetch";
 import BookList from "../components/BookList";
 import { Button, Container } from "react-bootstrap";
 import SearchForm from "../components/SearchForm";
@@ -26,6 +26,8 @@ const Home = () => {
 
 	useEffect(() => {
 		const loadInitialBooks = async () => {
+			setIsBooksLoading(true);
+
 			try {
 				setErrorMessage("");
 				const data = subject
@@ -39,7 +41,6 @@ const Home = () => {
 					searchBy: subject ? "subject" : "title",
 					language: "",
 				});
-				setIsBooksLoading(true);
 			} catch (error) {
 				setErrorMessage("Something went wrong. Please try again.");
 			}
@@ -83,6 +84,7 @@ const Home = () => {
 			nextPage,
 		);
 	};
+
 	return (
 		<Container className="my-4">
 			{errorMessage && (

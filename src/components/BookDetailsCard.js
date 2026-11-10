@@ -19,7 +19,13 @@ const BookDetailsCard = ({ book }) => {
 					<Col xs={12} md={8}>
 						<Card.Body className="book-details__body">
 							<h1 className="book-details__title">{book.title}</h1>
-							<p className="book-details__author">{book.authorName}</p>
+							{book.authorId ? (
+								<Link to={`/author/${book.authorId}`}>
+									<p className="book-details__author">{book.authorName}</p>
+								</Link>
+							) : (
+								<p className="book-details__author">{book.authorName}</p>
+							)}
 							<p className="book-details__date">
 								Publish Date: {book.publishDate}
 							</p>

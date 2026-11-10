@@ -61,8 +61,10 @@ export const fetchBookDetails = async (id) => {
 	);
 	const data = response.data;
 	let authorName = "Unknown author";
+	let authorId = null;
 	if (data.authors && data.authors.length > 0) {
 		const authorKey = data.authors[0].author.key;
+		authorId = authorKey.replace("/authors/", "");
 		const author = await axios.get(
 			`${process.env.REACT_APP_OPEN_LIBRARY_API}${authorKey}.json`,
 		);
@@ -77,8 +79,42 @@ export const fetchBookDetails = async (id) => {
 				: data.description.value
 			: "No description available.",
 		authorName: authorName,
+		authorId: authorId,
 		coverId: data.covers ? data.covers[0] : null,
 		subjects: data.subjects || [],
 		publishDate: data.first_publish_date || "Unknown publish date.",
+	};
+};
+
+export const fetchAuthorDetails = async (id) => {
+	const response = await axios.get(
+		`${process.env.REACT_APP_OPEN_LIBRARY_API}/authors/${id}.json`,
+	);
+	const author = response.data;
+	const works = await axios.get(
+		`${process.env.REACT_APP_OPEN_LIBRARY_API}/authors/${id}/works.json`,
+		{
+			params: { limit: 12 },
+		},
+	);
+	const worksData = works.data;
+
+	return {
+		name: author.name,
+		bio: author.bio
+			? typeof author.bio === "string"
+				? author.bio
+				: author.bio.value
+			: "No biography available.",
+		birthDate: author.birth_date || "No information",
+		deathDate: author.death_date || "-",
+		works: worksData.entries.map((work) => {
+			return {
+				id: work.key.replace("/works/", ""),
+				title: work.title,
+				authors: [author.name],
+				coverId: work.covers ? work.covers[0] : null,
+			};
+		}),
 	};
 };

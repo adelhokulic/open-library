@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { fetchBookDetails } from "../fetchApi/fetchBooks";
+import { fetchBookDetails } from "../fetchApi/fetch";
 import Loader from "../components/Loader";
 import BookDetailsCard from "../components/BookDetailsCard";
 
